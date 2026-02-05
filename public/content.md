@@ -678,6 +678,108 @@ We started with the insight that Claude is a silicon-based neural network that a
 
 **Want to teach this to your team?** Fork this methodology. Adapt it. Share it. Raise up masters.
 
+## Work With Me: The 5 Things Seminar
+
+### What $7,000/Day Gets You
+
+**Skip the trial and error. Get direct mentorship to launch.**
+
+I've compressed years of hard-won experience into a full-day intensive that takes you from context to launch in 1-3 sessions held in ONE DAY. Here's what the day looks like:
+
+### Hour 1: The 5 Things with YOUR Prompt
+
+We start with your actual project. Not a toy example—the real thing you need to build.
+
+- You bring the context (Thing 1)
+- We establish your high-level vision together (Thing 2)
+- I watch you interact with Claude and coach in real-time
+- You see exactly how I structure prompts for maximum leverage
+
+**By the end of Hour 1:** You have a complete design session artifact and understand WHY it works.
+
+### Hours 2-4: Design Sessions for Your Architecture
+
+This is where it gets real. We take your project through full design sessions:
+
+- **Architecture decisions** - I'll push back on your assumptions and help you establish rails
+- **Technical deep-dives** - We solve your hardest problems together with Claude
+- **Pattern recognition** - I show you the patterns I use daily across different domains
+- **Live implementation** - Watch me go big with your codebase
+
+**What you learn:**
+
+- How to identify when you're getting generic AI output vs. leveraged output
+- When to push back on Claude's suggestions
+- How to structure your codebase for AI collaboration (monorepo patterns, path aliases, shared models)
+- The daily learning habit that compounds your expertise
+
+### Hours 5-8: From Design to Launch
+
+Afternoon is execution. We take your designed system and ship it:
+
+- **Implementation sprint** - You drive, I coach, Claude builds
+- **Production hardening** - Error handling, edge cases, security review
+- **Deployment pipeline** - CI/CD, environment configuration, documentation
+- **Handoff preparation** - You're ready to continue solo
+
+### What You Leave With
+
+**After Day 1:**
+
+- Complete design session documentation for your project
+- Working prototype or MVP deployed to staging
+- Your own rails documented and established
+- Confidence to run design sessions independently
+
+**After 2-3 Sessions:**
+
+- Production-ready system launched
+- Team trained in the methodology
+- Established workflow for future projects
+- Direct access to me for follow-up questions
+
+### Who This Is For
+
+**Good fit:**
+
+- Technical founders building their first AI-assisted product
+- Engineering leads who want to transform team velocity
+- Experienced developers ready to 10x their output
+- Anyone with a real project and a deadline
+
+**Not a good fit:**
+
+- "Just curious about AI" (read this document instead—it's free)
+- No specific project in mind
+- Looking for AI to replace thinking (it amplifies thinking, it doesn't replace it)
+
+### Book Your Session
+
+**$7,000/day** - Full-day intensive, remote or in-person (Raleigh-Durham area)
+
+**What's included:**
+
+- 8 hours of focused mentorship
+- Pre-session questionnaire to maximize our time
+- All design artifacts and documentation
+- 30 days of async follow-up via email
+
+**Contact:** brian@kingslandacademy.com
+
+Subject line: "5 Things Seminar - [Your Project]"
+
+Tell me:
+
+1. What you're building
+2. Where you're stuck
+3. Your timeline
+
+I'll respond within 24 hours with availability and next steps.
+
+**This is the fast path.** You can learn the 5 Things yourself through months of experimentation, or you can have someone who's already made the mistakes walk you through it in a day.
+
+The methodology is free. The mentorship is $7k. The ROI is 50x velocity on every project you touch for the rest of your career.
+
 ## One More Thing
 
 Here's the prompt that made this web page:
