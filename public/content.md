@@ -1,7 +1,6 @@
 # Webb's 5 Things for AI
 
-## How to Build 50x Faster with Higher Quality
-
+**How to Build 50x Faster with Higher Quality**
 **Author:** Brian Webb, Software Consultant
 **Date:** February 5, 2026
 
@@ -23,6 +22,8 @@ Don't write sterile, technical prompts. Bring your whole self into the conversat
 - Context shapes which neural pathways activate
 - Your personality, experience, and communication style prime different activation patterns
 - Rich context creates consistency across conversations
+
+<slidebreak />
 
 **Bad approach:**
 
@@ -52,6 +53,8 @@ standard expiration. What do you think?
 
 - First version: Generic AI output
 - Second version: Output that matches YOUR technical judgment and priorities
+
+<slidebreak />
 
 ### The Neural Network Principle
 
@@ -83,7 +86,9 @@ Before touching any code, establish the high-level picture.
 3. Who benefits and how?
 4. What are we NOT solving (scope boundaries)?
 
-**Example: Security Software Licensing**
+<slidebreak />
+
+### Example: Security Software Licensing
 
 **Problem:** Sales can't deliver licenses immediately. Customer enthusiasm dies during the wait.
 
@@ -92,6 +97,8 @@ Before touching any code, establish the high-level picture.
 **Success:** Professional services team generates 10+ licenses in first week. Zero license-related support tickets. Sales reports improved close rate.
 
 **NOT solving:** Hardware binding, license revocation, usage analytics (yet). Those come later.
+
+<slidebreak />
 
 ### Why High-Level First Matters
 
@@ -111,13 +118,15 @@ Before touching any code, establish the high-level picture.
 
 **The trap:** Junior developers (and nervous consultants) jump straight to implementation details to prove they're smart. Senior developers establish the vision first because they know **building the right thing poorly beats building the wrong thing well.**
 
-## 3. Have a Design Session with CLAUDE Before Starting
+## 3. Design Session First
 
 ### This is Where You Have It Teach You
 
 Don't just tell Claude what to build. **Have a conversation where you design together.**
 
-**The design session structure:**
+<slidebreak />
+
+### The design session structure
 
 1. **Share the vision** (from step 2)
 2. **Ask Claude to identify the gaps**
@@ -133,7 +142,9 @@ Don't just tell Claude what to build. **Have a conversation where you design tog
    - What we're deferring
    - What assumptions we're making
 
-**Example: Security Software Licensing Design Session**
+<slidebreak />
+
+### Example: Security Software Licensing Design Session
 
 **Brian:** "Before we build, what are the key questions we need to answer?"
 
@@ -152,6 +163,8 @@ Don't just tell Claude what to build. **Have a conversation where you design tog
 4. Nothing exists yet - we're building from scratch"
 
 **Claude:** "Got it. So we're designing for greenfield. That means we can..."
+
+<slidebreak />
 
 ### The Teaching Happens Here
 
@@ -188,7 +201,9 @@ You've done the design work. You have a clear vision. Now **execute with velocit
 - Don't settle for toy examples—build production-ready code
 - Don't ask permission—make decisions and move
 
-**Example: Security Software CLI Tool**
+<slidebreak />
+
+### Example: Security Software CLI Tool
 
 **Small approach:**
 
@@ -213,7 +228,9 @@ Ship something the professional services team can actually use TODAY.
 
 **Reality:** Small increments create coordination overhead and context switching. You lose momentum. You forget why you made decisions. You ship 10 half-baked features instead of 3 complete ones.
 
-**Better approach:**
+<slidebreak />
+
+### Better approach
 
 1. Design completely (step 3)
 2. Implement completely (step 4)
@@ -221,6 +238,8 @@ Ship something the professional services team can actually use TODAY.
 4. Iterate based on real usage
 
 **This is how we build 50x faster.** Not by cutting corners, but by eliminating the stop-and-start rhythm that kills momentum.
+
+<slidebreak />
 
 ### What Claude Enables
 
@@ -234,7 +253,7 @@ Claude will do it. Completely. In one shot. Because you already did the design w
 
 ## 5. But You Have to Go Big with Rails
 
-### Constraints that Enable Velocity
+**Constraints that Enable Velocity**
 
 Going big doesn't mean "build everything." It means **build the right things completely, within clear constraints.**
 
@@ -244,6 +263,8 @@ Going big doesn't mean "build everything." It means **build the right things com
 - They eliminate bikeshedding ("Should the config be JSON or YAML?")
 - They enable fast decisions ("We always use RS256")
 - They create consistency ("All licenses expire")
+
+<slidebreak />
 
 ### Example: Security Software Licensing Rails
 
@@ -268,7 +289,9 @@ Going big doesn't mean "build everything." It means **build the right things com
 - Strict JWT validation (no tolerance for malformed tokens)
 - Entitlements are additive only
 
-### Monorepo Rails: My Strong Opinions
+<slidebreak />
+
+### Example: Monorepo Rails > My Strong Tech Opinions
 
 Over time, I've developed **strong opinions** about code organization through daily learning with Claude. Here's my monorepo structure that has become a rail:
 
@@ -292,6 +315,8 @@ project-root/
 - Shared tooling (ESLint, Prettier, TypeScript configs)
 - Build once, import everywhere
 
+<slidebreak />
+
 **This wasn't handed to me.** I learned this through:
 
 - Daily experimentation with Claude
@@ -300,6 +325,8 @@ project-root/
 - Seeing what scales and what breaks
 
 **These are MY opinions now.** They work for me. You need to develop YOUR opinions through the same process.
+
+<slidebreak />
 
 ### The Daily Learning Rail
 
@@ -318,6 +345,8 @@ project-root/
 **This compounds.** Each conversation builds your technical judgment. Each decision becomes a rail for future projects.
 
 **The monorepo rail didn't exist for me 6 months ago.** Now it's automatic. That's how you build expertise—one conversation at a time, with a mentor who's always available.
+
+<slidebreak />
 
 ### Why Rails Enable Speed
 
@@ -338,6 +367,8 @@ project-root/
 - "Monorepo with pnpm, TypeScript paths" → Done, moving on
 
 **Result:** We spent 2 hours on design session and shipped in a week instead of 2 months of discussions.
+
+<slidebreak />
 
 ### The Rails Principle
 
@@ -361,9 +392,9 @@ project-root/
 
 ## Putting It All Together
 
-### The Complete Workflow
+### Traditional Development
 
-**Traditional Development:**
+**Weeks 1-13:**
 
 1. Requirements doc (2 weeks)
 2. Architecture review (1 week)
@@ -372,11 +403,11 @@ project-root/
 5. QA (2 weeks)
 6. Documentation (1 week)
 
-**Total:** 13 weeks
+<slidebreak />
 
-**Webb's 5 Things Approach:**
+### Webb's 5 Things Approach
 
-**Week 1, Day 1:**
+**Day 1:**
 
 1. **Bring yourself** - 30-minute conversation establishing context
 2. **Start high level** - 1 hour defining vision and success criteria
@@ -384,13 +415,19 @@ project-root/
 4. **Go big** - 4 hours implementing complete solution
 5. **Rails** - Decisions already made, no blocking
 
-**Week 1, Day 2-3:**
+**Day 2-3:**
 
 - Testing with real users
 - Refinement based on feedback
 - Documentation (already created during design)
 
-**Total:** 3-5 days
+<slidebreak />
+
+<attention-getter-1>
+13 weeks to 3 Days! Practice this and it's 1 day.
+</attention-getter-1>
+
+<slidebreak />
 
 ### The 50x Multiplier Explained
 
@@ -419,6 +456,8 @@ project-root/
 
 ## Common Objections
 
+<slidebreak />
+
 ### "This only works for simple projects"
 
 **Reality:** The more complex the project, the MORE valuable this approach becomes.
@@ -426,6 +465,8 @@ project-root/
 Complex projects die from coordination overhead and context loss. This approach eliminates both. The design session scales to any complexity—you just invest more time designing. But implementation velocity stays constant because Claude can build complex systems as easily as simple ones.
 
 **Example:** We're building JWT licensing (simple), but next week we're using the same approach to build the API integration with database migrations, authentication middleware, and feature gating (complex). Same 5 principles, same velocity.
+
+<slidebreak />
 
 ### "You can't trust AI for production code"
 
@@ -435,6 +476,8 @@ The design session is where you verify Claude understands the constraints, edge 
 
 **What you review:** Correctness of approach (design session handles this)
 **What you don't review:** Syntax, style, boilerplate (Claude does this better than humans)
+
+<slidebreak />
 
 ### "This requires an experienced developer"
 
@@ -451,6 +494,8 @@ Why? Because you're having expert-level architectural discussions every day. Cla
 **Traditional development:** Junior dev gets feedback once a week in code review
 **This approach:** Junior dev gets feedback continuously in design sessions
 
+<slidebreak />
+
 ### "Our company would never allow this"
 
 **Reality:** Your company allows 13-week projects that ship mediocre solutions.
@@ -460,6 +505,8 @@ Start small. Use this approach for internal tools or prototypes. Show the result
 **Pro tip:** Don't tell them it's "AI." Tell them it's "modern development practices with rapid prototyping and continuous validation." Which is true.
 
 ## Raising Up Masters: The Mentorship Multiplier
+
+<slidebreak />
 
 ### The Traditional Path to Mastery
 
@@ -481,11 +528,15 @@ Historically, becoming a master took one of two paths:
 
 **Both paths take 5-10 years minimum.**
 
+<slidebreak />
+
 ### The AI-Enabled Path
 
 **AI, used right, is like having that mentor that some of us had, or providentially had several.**
 
 But you have to know how to use it. This is where the 5 Things come in.
+
+<slidebreak />
 
 ### Real Example: My 18-Year-Old Son
 
@@ -501,6 +552,8 @@ He would have taken a dual enrollment calculus course, struggled with a professo
 1. Pushed through with incomplete understanding, or
 2. Failed and retaken the course
 
+<slidebreak />
+
 **What We Actually Did:**
 He dropped the dual enrollment course and switched to an asynchronous AP Calculus AB course. But here's the key: **he uses AI as his calculus tutor every single day.**
 
@@ -515,6 +568,8 @@ He dropped the dual enrollment course and switched to an asynchronous AP Calculu
 **Result:** He's not just learning calculus faster—he's learning HOW to learn. He's developing the skill of asking good questions, identifying gaps in his understanding, and seeking expert guidance.
 
 **This is the same process I use for software development.** The domain is different, but the methodology is identical.
+
+<slidebreak />
 
 ### The Compounding Effect
 
@@ -533,6 +588,8 @@ He dropped the dual enrollment course and switched to an asynchronous AP Calculu
 - Zero geographic constraints
 
 **But here's the critical insight:** The AI only works as a mentor if you know the 5 Things.
+
+<slidebreak />
 
 ### Why This Matters for Raising Up Masters
 
@@ -554,6 +611,8 @@ This is why this document exists. This is why it's on GitHub Pages.
 - Knowledge transfer is fast and effective
 - Expertise is multiplied
 
+<slidebreak />
+
 ### What This Looks Like in Practice
 
 **Week 1:** Junior developer learns the 5 Things
@@ -565,6 +624,8 @@ This is why this document exists. This is why it's on GitHub Pages.
 **Traditional timeline:** 2-3 years to get to the same level.
 
 **This isn't theoretical.** I've seen it. My son is experiencing it with calculus. I'm experiencing it with every new technology I learn.
+
+<slidebreak />
 
 ### The Responsibility
 
@@ -580,6 +641,8 @@ Why? Because:
 **The old model:** Hoard knowledge, maintain competitive advantage through scarcity.
 
 **The new model:** Share methodology, create competitive advantage through velocity and quality.
+
+<slidebreak />
 
 ### How to Teach the 5 Things
 
@@ -598,7 +661,9 @@ Why? Because:
 
 **Pair with them on their first project using the 5 Things.**
 
-Watch them:
+<slidebreak />
+
+**Watch them:**
 
 - Struggle to provide context (teach Thing 1)
 - Jump to implementation (enforce Thing 2)
@@ -607,6 +672,8 @@ Watch them:
 - Get paralyzed by options (establish Thing 5)
 
 **This is mentorship.** You're not teaching them to code. You're teaching them to think, to design, to learn continuously with an AI partner.
+
+<slidebreak />
 
 ### The Future is Now
 
@@ -656,28 +723,6 @@ We started with the insight that Claude is a silicon-based neural network that a
 
 **Then teach someone else.**
 
-## Case Study: Security Software JWT Licensing
-
-**Challenge:** Build JWT licensing system from scratch. Enable sales to generate licenses on the spot.
-
-**Timeline using Webb's 5 Things:**
-
-- Day 1: Context, vision, design session, CLI implementation
-- Day 2-3: API/UI integration via Claude Code
-- Day 4-5: Testing and refinement
-
-**Total:** 5 days to production
-
-**Traditional timeline estimate:** 10-13 weeks
-
-**Quality difference:** None. Actually better because design session caught edge cases early.
-
-**Business impact:** Sales can close deals on the spot. Zero friction. CEO's vision delivered.
-
-**Questions?** Contact Brian Webb at brian@kingslandacademy.com
-
-**Want to teach this to your team?** Fork this methodology. Adapt it. Share it. Raise up masters.
-
 ## Work With Me: The 5 Things Seminar
 
 ### What $7,000/Day Gets You
@@ -685,6 +730,14 @@ We started with the insight that Claude is a silicon-based neural network that a
 **Skip the trial and error. Get direct mentorship to launch.**
 
 I've compressed years of hard-won experience into a full-day intensive that takes you from context to launch in 1-3 sessions held in ONE DAY. Here's what the day looks like:
+
+**Contact:** brian@kingslandacademy.com
+
+<appendix />
+
+<attention-getter-1>Appendix</attention-getter-1>
+
+**5 Things Seminar Details**
 
 ### Hour 1: The 5 Things with YOUR Prompt
 
@@ -755,7 +808,9 @@ Afternoon is execution. We take your designed system and ship it:
 
 ### Book Your Session
 
-**$7,000/day** - Full-day intensive, remote or in-person (Raleigh-Durham area)
+**$7,000/day** - Full-day intensive via video call (remote is default)
+
+_In-person available in Raleigh-Durham area: +travel and incidentals_
 
 **What's included:**
 
@@ -779,6 +834,26 @@ I'll respond within 24 hours with availability and next steps.
 **This is the fast path.** You can learn the 5 Things yourself through months of experimentation, or you can have someone who's already made the mistakes walk you through it in a day.
 
 The methodology is free. The mentorship is $7k. The ROI is 50x velocity on every project you touch for the rest of your career.
+
+## Case Study: Security Software JWT Licensing
+
+**Challenge:** Build JWT licensing system from scratch. Enable sales to generate licenses on the spot.
+
+**Timeline using Webb's 5 Things:**
+
+- Day 1: Context, vision, design session, CLI implementation
+- Day 2-3: API/UI integration via Claude Code
+- Day 4-5: Testing and refinement
+
+**Total:** 5 days to production
+
+**Traditional timeline estimate:** 10-13 weeks
+
+**Quality difference:** None. Actually better because design session caught edge cases early.
+
+**Business impact:** Sales can close deals on the spot. Zero friction. CEO's vision delivered.
+
+**Want to teach this to your team?** Fork this methodology. Adapt it. Share it. Raise up masters.
 
 ## One More Thing
 

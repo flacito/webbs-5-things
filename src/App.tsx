@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo, useCallback } from "react";
+import { useState, useEffect, useMemo, useCallback, useRef } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
@@ -6,60 +6,14 @@ import rehypeSlug from "rehype-slug";
 import {
   Menu,
   X,
-  Sun,
-  Moon,
-  Monitor,
   ChevronRight,
   Link as LinkIcon,
 } from "lucide-react";
+import { Toolbar } from "./components/Toolbar";
+import { PresentationView } from "./components/PresentationView";
 
 type Theme = "dark" | "light" | "system";
-
-function ThemeToggle({
-  theme,
-  setTheme,
-}: {
-  theme: Theme;
-  setTheme: (t: Theme) => void;
-}) {
-  return (
-    <div className="inline-flex items-center rounded-lg border border-gh-border overflow-hidden bg-gh-bg-secondary">
-      <button
-        onClick={() => setTheme("dark")}
-        className={`p-2 transition-colors ${
-          theme === "dark"
-            ? "bg-gh-accent text-white"
-            : "text-gh-text hover:bg-gh-border/50"
-        }`}
-        title="Dark mode"
-      >
-        <Moon size={16} />
-      </button>
-      <button
-        onClick={() => setTheme("system")}
-        className={`p-2 transition-colors ${
-          theme === "system"
-            ? "bg-gh-accent text-white"
-            : "text-gh-text hover:bg-gh-border/50"
-        }`}
-        title="System preference"
-      >
-        <Monitor size={16} />
-      </button>
-      <button
-        onClick={() => setTheme("light")}
-        className={`p-2 transition-colors ${
-          theme === "light"
-            ? "bg-gh-accent text-white"
-            : "text-gh-text hover:bg-gh-border/50"
-        }`}
-        title="Light mode"
-      >
-        <Sun size={16} />
-      </button>
-    </div>
-  );
-}
+type ViewMode = "presentation" | "reading";
 
 interface TocItem {
   id: string;
@@ -129,6 +83,18 @@ function TableOfContents({
   isVisible?: boolean;
   onToggleVisible?: () => void;
 }) {
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  // Auto-scroll to keep active item visible
+  useEffect(() => {
+    if (!activeId || !scrollContainerRef.current) return;
+
+    const activeElement = scrollContainerRef.current.querySelector(`[data-toc-id="${activeId}"]`);
+    if (activeElement) {
+      activeElement.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+  }, [activeId]);
+
   return (
     <nav className="toc">
       {onToggleVisible ? (
@@ -150,6 +116,7 @@ function TableOfContents({
         </h3>
       )}
       <div
+        ref={scrollContainerRef}
         className={`transition-all duration-300 ease-in-out ${
           isVisible === false
             ? "max-h-0 opacity-0 overflow-hidden"
@@ -187,6 +154,7 @@ function TableOfContents({
                   <a
                     href={`#${section.item.id}`}
                     onClick={onClose}
+                    data-toc-id={section.item.id}
                     className={`toc-link flex-1 ${shouldHighlight ? "active" : ""} ${
                       !section.children.length ? "ml-5" : ""
                     }`}
@@ -207,6 +175,7 @@ function TableOfContents({
                         <a
                           href={`#${child.id}`}
                           onClick={onClose}
+                          data-toc-id={child.id}
                           className={`toc-link text-sm ${activeId === child.id ? "active" : ""}`}
                         >
                           {child.title}
@@ -330,6 +299,13 @@ function App() {
     }
     return "system";
   });
+  const [mode, setMode] = useState<ViewMode>(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("viewMode") as ViewMode;
+      return saved || "presentation";
+    }
+    return "presentation";
+  });
 
   // Fetch markdown content
   useEffect(() => {
@@ -350,6 +326,14 @@ function App() {
   useEffect(() => {
     localStorage.setItem("tocVisible", String(tocVisible));
   }, [tocVisible]);
+
+  // Save view mode to localStorage and reset to first slide when entering presentation
+  useEffect(() => {
+    localStorage.setItem("viewMode", mode);
+    if (mode === "presentation") {
+      window.location.hash = "#/0";
+    }
+  }, [mode]);
 
   // Combined expanded sections = pinned + auto-expanded
   const expandedSections = useMemo(() => {
@@ -424,9 +408,9 @@ function App() {
     });
   }, []);
 
-  // Intersection observer for active heading
+  // Intersection observer for active heading (only in reading mode)
   useEffect(() => {
-    if (loading) return;
+    if (loading || mode !== "reading") return;
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -445,7 +429,7 @@ function App() {
     headings.forEach((heading) => observer.observe(heading));
 
     return () => observer.disconnect();
-  }, [loading]);
+  }, [loading, mode]);
 
   if (loading) {
     return (
@@ -455,38 +439,49 @@ function App() {
     );
   }
 
+  // Presentation mode
+  if (mode === "presentation") {
+    return (
+      <>
+        <Toolbar theme={theme} setTheme={setTheme} mode={mode} setMode={setMode} />
+        <PresentationView content={content} />
+      </>
+    );
+  }
+
+  // Reading mode
   return (
     <div className="min-h-screen bg-gh-bg">
+      {/* Liquid Glass Toolbar */}
+      <Toolbar theme={theme} setTheme={setTheme} mode={mode} setMode={setMode} />
+
       {/* Mobile header */}
-      <header className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-gh-bg-secondary border-b border-gh-border">
+      <header className="lg:hidden fixed top-16 left-0 right-0 z-40 bg-gh-bg-secondary border-b border-gh-border">
         <div className="flex items-center justify-between px-4 py-3">
           <h1 className="text-lg font-semibold text-gh-heading">
             Webb's 5 Things
           </h1>
-          <div className="flex items-center gap-2">
-            <ThemeToggle theme={theme} setTheme={setTheme} />
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 text-gh-text hover:text-gh-link transition-colors"
-              aria-label="Toggle menu"
-            >
-              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="p-2 text-gh-text hover:text-gh-link transition-colors"
+            aria-label="Toggle menu"
+          >
+            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
         </div>
       </header>
 
       {/* Mobile menu overlay */}
       {mobileMenuOpen && (
         <div
-          className="lg:hidden fixed inset-0 z-40 bg-black/50"
+          className="lg:hidden fixed inset-0 z-30 bg-black/50"
           onClick={() => setMobileMenuOpen(false)}
         />
       )}
 
       {/* Mobile sidebar */}
       <aside
-        className={`lg:hidden fixed top-[57px] right-0 bottom-0 w-80 max-w-[80vw] z-50 bg-gh-bg-secondary border-l border-gh-border transform transition-transform duration-300 ${
+        className={`lg:hidden fixed top-[120px] right-0 bottom-0 w-80 max-w-[80vw] z-40 bg-gh-bg-secondary border-l border-gh-border transform transition-transform duration-300 ${
           mobileMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
@@ -501,15 +496,10 @@ function App() {
         </div>
       </aside>
 
-      <div className="lg:flex max-w-7xl mx-auto">
+      <div className="lg:flex max-w-7xl mx-auto pt-16">
         {/* Desktop sidebar with toggle */}
         <aside className="hidden lg:block flex-shrink-0 w-72 py-8 pl-4">
-          <div className="sticky top-8">
-            {/* Theme toggle above */}
-            <div className="mb-3">
-              <ThemeToggle theme={theme} setTheme={setTheme} />
-            </div>
-
+          <div className="sticky top-24">
             {/* Seminar callout */}
             <a
               href="mailto:brian@kingslandacademy.com?subject=Webb's 5 Things Seminar"
@@ -519,8 +509,8 @@ function App() {
                 5 Things Seminar
               </p>
               <p className="text-gh-text/70">
-                Full-day mentoring: context to launch in 1-3 sessions in ONE
-                DAY. $7k/day.
+                Full-day remote mentoring: context to launch in 1-3 sessions.
+                $7k/day.
               </p>
             </a>
 
