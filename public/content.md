@@ -502,7 +502,7 @@ He would have taken a dual enrollment calculus course, struggled with a professo
 2. Failed and retaken the course
 
 **What We Actually Did:**
-He dropped the dual enrollment course and switched to an asynchronous AP Calculus AB course. But here's the key: **he uses Claude as his calculus tutor every single day.**
+He dropped the dual enrollment course and switched to an asynchronous AP Calculus AB course. But here's the key: **he uses AI as his calculus tutor every single day.**
 
 **How it works:**
 
