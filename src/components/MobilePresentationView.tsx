@@ -3,7 +3,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
 import rehypeRaw from "rehype-raw";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
 interface Slide {
   content: string;
@@ -98,9 +98,20 @@ export function MobilePresentationView({ content }: MobilePresentationViewProps)
           </div>
           {!slide.isAppendix && (
             <div className="mobile-slide-footer">
-              <div className="mobile-slide-number">
-                {i + 1} / {slides.length}
-              </div>
+              {i > 0 ? (
+                <button
+                  onClick={() => scrollToSlide(i - 1)}
+                  className="mobile-slide-prev"
+                  aria-label="Previous slide"
+                >
+                  <ChevronUp size={14} />
+                  <span>Prev</span>
+                </button>
+              ) : (
+                <div className="mobile-slide-number">
+                  {i + 1} / {slides.length}
+                </div>
+              )}
               {i < slides.length - 1 && (
                 <button
                   onClick={() => scrollToSlide(i + 1)}
