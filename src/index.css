@@ -1326,3 +1326,40 @@ html.dark .mode-toggle button.active {
     display: flex;
   }
 }
+
+/* Seminar CTA button */
+.seminar-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  background: var(--gh-accent);
+  color: white;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.seminar-cta:hover {
+  background: var(--gh-link);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Mobile: bottom center */
+.mobile-slide .seminar-cta-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+/* Desktop (Reveal.js): bottom left */
+.reveal .seminar-cta-wrapper {
+  position: absolute;
+  bottom: 2rem;
+  left: 6rem;
+}

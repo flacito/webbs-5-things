@@ -4,6 +4,7 @@ import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
 import rehypeRaw from "rehype-raw";
 import { ChevronDown, ChevronUp } from "lucide-react";
+import { SeminarCTA } from "./SeminarCTA";
 
 interface Slide {
   content: string;
@@ -95,6 +96,11 @@ export function MobilePresentationView({ content }: MobilePresentationViewProps)
             >
               {slide.content}
             </ReactMarkdown>
+            {i === 0 && (
+              <div className="seminar-cta-wrapper">
+                <SeminarCTA />
+              </div>
+            )}
           </div>
           {!slide.isAppendix && (
             <div className="mobile-slide-footer">

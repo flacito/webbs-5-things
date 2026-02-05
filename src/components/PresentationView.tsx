@@ -5,6 +5,7 @@ import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
 import rehypeRaw from "rehype-raw";
 import "reveal.js/dist/reveal.css";
+import { SeminarCTA } from "./SeminarCTA";
 
 interface Slide {
   content: string;
@@ -172,6 +173,11 @@ export function PresentationView({ content }: PresentationViewProps) {
                 {slide.content}
               </ReactMarkdown>
             </div>
+            {i === 0 && (
+              <div className="seminar-cta-wrapper">
+                <SeminarCTA />
+              </div>
+            )}
           </section>
         ))}
         {/* Appendix: scrollable reading section */}
