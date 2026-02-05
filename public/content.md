@@ -491,9 +491,9 @@ But you have to know how to use it. This is where the 5 Things come in.
 
 My son is applying to NC State's mechanical engineering program. He's a homeschooled student with:
 
-- 3.96 unweighted GPA, 4.46 weighted
-- ACT 33, SAT 1340
-- 40+ college credits from community college
+- good GPA
+- great SAT / ACT
+- lots of college credits from our WONDERFUL community college system
 
 **The Traditional Approach:**
 He would have taken a dual enrollment calculus course, struggled with a professor who "goes WAY TOO FAST" (actual RateMyProfessor reviews), gotten mediocre feedback once a week, and either:
