@@ -1102,6 +1102,11 @@ html.dark .mode-toggle button.active {
   overflow-x: auto;
   font-size: 0.75rem;
   margin: 0.5em 0;
+  color: var(--gh-text);
+}
+
+.mobile-slide-content pre code {
+  color: inherit;
 }
 
 .mobile-slide-content code {
