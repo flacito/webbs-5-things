@@ -1002,9 +1002,11 @@ html.dark .mode-toggle button.active {
 .mobile-slide {
   width: 100%;
   min-height: var(--mobile-vh, 100vh);
-  padding: 4rem 1.5rem 3rem 1.5rem; /* Extra top padding for sticky toolbar */
+  padding: 4rem 1.5rem 2rem 1.5rem; /* Extra top padding for sticky toolbar */
   border-bottom: 1px solid var(--gh-border);
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 }
 
 .mobile-slide:last-child {
@@ -1014,6 +1016,7 @@ html.dark .mode-toggle button.active {
 .mobile-slide-content {
   max-width: 100%;
   text-align: left;
+  flex: 1; /* Grow to fill available space, pushing footer to bottom */
 }
 
 /* Typography for mobile slides */
@@ -1177,8 +1180,8 @@ html.dark .mode-toggle button.active {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 2rem;
-  padding-top: 1rem;
+  margin-top: auto; /* Push to bottom of flex container */
+  padding-top: 1.5rem;
   border-top: 1px solid var(--gh-border);
 }
 
