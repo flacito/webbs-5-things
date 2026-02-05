@@ -1001,17 +1001,10 @@ html.dark .mode-toggle button.active {
 
 .mobile-slide {
   width: 100%;
-  min-height: 100vh;
-  min-height: 100svh; /* Small viewport height */
-  padding: 1.5rem 1.5rem 3rem 1.5rem;
+  min-height: var(--mobile-vh, 100vh);
+  padding: 4rem 1.5rem 3rem 1.5rem; /* Extra top padding for sticky toolbar */
   border-bottom: 1px solid var(--gh-border);
   box-sizing: border-box;
-}
-
-@supports (min-height: 100dvh) {
-  .mobile-slide {
-    min-height: 100dvh;
-  }
 }
 
 .mobile-slide:last-child {

@@ -352,6 +352,23 @@ function App() {
     };
   }, []);
 
+  // Set mobile viewport height CSS variable (fixes 100vh on mobile browsers)
+  useEffect(() => {
+    const setMobileVh = () => {
+      const vh = window.innerHeight;
+      document.documentElement.style.setProperty('--mobile-vh', `${vh}px`);
+    };
+
+    setMobileVh();
+    window.addEventListener("resize", setMobileVh);
+    window.addEventListener("orientationchange", setMobileVh);
+
+    return () => {
+      window.removeEventListener("resize", setMobileVh);
+      window.removeEventListener("orientationchange", setMobileVh);
+    };
+  }, []);
+
   // Save view mode to localStorage and reset to first slide when entering presentation
   useEffect(() => {
     localStorage.setItem("viewMode", mode);
