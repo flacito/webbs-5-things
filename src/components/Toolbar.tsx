@@ -1,4 +1,4 @@
-import { Sun, Moon, Monitor, BookOpen, Presentation, Mail, Home } from "lucide-react";
+import { Sun, Moon, Monitor, BookOpen, Presentation, Mail, Home, Github } from "lucide-react";
 
 type Theme = "dark" | "light" | "system";
 type ViewMode = "presentation" | "reading";
@@ -95,6 +95,20 @@ export function Toolbar({ theme, setTheme, mode, setMode }: ToolbarProps) {
       >
         <Mail size={14} />
         <span className="hidden md:inline">$7k Seminar</span>
+      </a>
+
+      {/* Divider */}
+      <div className="w-px h-6 bg-gh-border/50" />
+
+      {/* GitHub repo link */}
+      <a
+        href="https://github.com/flacito/webbs-5-things"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="liquid-glass-button p-2 hover:text-gh-link transition-colors"
+        title="Fork me!"
+      >
+        <Github size={16} />
       </a>
     </div>
   );

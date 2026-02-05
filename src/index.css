@@ -743,4 +743,197 @@ html.dark .mode-toggle button.active {
   .markdown-content h3 {
     font-size: 1.25rem;
   }
+
+  /* Mobile presentation mode adjustments */
+  .reveal .slides section {
+    padding: 4rem 1.5rem 2rem 1.5rem !important;
+  }
+
+  .reveal .slides > section {
+    padding: 4rem 1.5rem 2rem 1.5rem !important;
+  }
+
+  .reveal h1 {
+    font-size: 2rem !important;
+  }
+
+  .reveal h2 {
+    font-size: 1.25rem !important;
+  }
+
+  .reveal section > h2:first-child,
+  .reveal .slide-content > h2:first-child {
+    font-size: 1.75rem !important;
+  }
+
+  .reveal section > h3:first-child {
+    font-size: 1.5rem !important;
+  }
+
+  .reveal h3 {
+    font-size: 0.9rem !important;
+  }
+
+  .reveal h4 {
+    font-size: 0.9rem !important;
+  }
+
+  .reveal p {
+    font-size: 0.95rem !important;
+  }
+
+  .reveal li {
+    font-size: 0.85rem !important;
+  }
+
+  .reveal ul ul li {
+    font-size: 0.8rem !important;
+  }
+
+  .reveal pre {
+    font-size: 0.65rem !important;
+    padding: 0.5em !important;
+  }
+
+  /* Smaller attention-getters on mobile */
+  .reveal attention-getter-1 {
+    font-size: 2rem !important;
+  }
+
+  .reveal attention-getter-2 {
+    font-size: 1.5rem !important;
+  }
+
+  .reveal attention-getter-3 {
+    font-size: 1.25rem !important;
+  }
+
+  .reveal attention-getter-4 {
+    font-size: 1.1rem !important;
+  }
+
+  .reveal attention-getter-5 {
+    font-size: 1rem !important;
+  }
+
+  /* Mobile appendix adjustments */
+  .reveal .appendix-content {
+    padding: 4rem 1rem 2rem 1rem;
+    height: calc(100vh - 4rem);
+  }
+
+  .reveal .appendix-content h1 {
+    font-size: 1.75rem !important;
+  }
+
+  .reveal .appendix-content h2 {
+    font-size: 1.25rem !important;
+  }
+
+  .reveal .appendix-content h3 {
+    font-size: 1.1rem !important;
+  }
+
+  /* Larger touch targets for controls */
+  .reveal .controls {
+    font-size: 1.5rem !important;
+  }
+
+  /* Mobile toolbar adjustments */
+  .liquid-glass {
+    padding: 0.375rem 0.5rem;
+    border-radius: 12px;
+  }
+
+  .liquid-glass-button {
+    padding: 0.375rem 0.5rem;
+  }
+
+  .mode-toggle button {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.7rem;
+  }
+}
+
+/* Very small screens (phones in portrait) */
+@media (max-width: 480px) {
+  .reveal .slides section {
+    padding: 3.5rem 1rem 1.5rem 1rem !important;
+  }
+
+  .reveal .slides > section {
+    padding: 3.5rem 1rem 1.5rem 1rem !important;
+  }
+
+  .reveal h1 {
+    font-size: 1.5rem !important;
+  }
+
+  .reveal section > h2:first-child,
+  .reveal .slide-content > h2:first-child {
+    font-size: 1.35rem !important;
+  }
+
+  .reveal section > h3:first-child {
+    font-size: 1.2rem !important;
+  }
+
+  .reveal p {
+    font-size: 0.85rem !important;
+    line-height: 1.5 !important;
+  }
+
+  .reveal li {
+    font-size: 0.8rem !important;
+    line-height: 1.4 !important;
+  }
+
+  .reveal pre {
+    font-size: 0.55rem !important;
+  }
+
+  .reveal attention-getter-1 {
+    font-size: 1.5rem !important;
+  }
+
+  .reveal attention-getter-2 {
+    font-size: 1.25rem !important;
+  }
+
+  .reveal attention-getter-3 {
+    font-size: 1.1rem !important;
+  }
+
+  .reveal .appendix-content {
+    padding: 3.5rem 0.75rem 1.5rem 0.75rem;
+  }
+
+  /* Even smaller toolbar */
+  .liquid-glass {
+    padding: 0.25rem 0.375rem;
+    gap: 0.25rem;
+  }
+
+  .liquid-glass-button {
+    padding: 0.25rem 0.375rem;
+  }
+
+  .liquid-glass-button svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .mode-toggle {
+    padding: 2px;
+  }
+
+  .mode-toggle button {
+    padding: 0.2rem 0.4rem;
+    font-size: 0.65rem;
+  }
+
+  /* Hide text labels on very small screens */
+  .mode-toggle button span.hidden {
+    display: none !important;
+  }
 }
