@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { Sun, Moon, Monitor, BookOpen, Presentation, Mail, Home, Github } from "lucide-react";
+import { SeminarModal } from "./SeminarModal";
 
 type Theme = "dark" | "light" | "system";
 type ViewMode = "presentation" | "reading";
@@ -11,12 +13,15 @@ interface ToolbarProps {
 }
 
 export function Toolbar({ theme, setTheme, mode, setMode }: ToolbarProps) {
+  const [showSeminarModal, setShowSeminarModal] = useState(false);
+
   const goHome = () => {
     // Navigate to first slide in Reveal.js
     window.location.hash = '#/0';
   };
 
   return (
+    <>
     <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 liquid-glass px-3 py-2 flex items-center gap-3">
       {/* Theme toggle */}
       <div className="flex items-center gap-1">
@@ -88,14 +93,14 @@ export function Toolbar({ theme, setTheme, mode, setMode }: ToolbarProps) {
       <div className="w-px h-6 bg-gh-border/50" />
 
       {/* Seminar callout */}
-      <a
-        href="mailto:brian@kingslandacademy.com?subject=Webb's 5 Things Seminar"
+      <button
+        onClick={() => setShowSeminarModal(true)}
         className="liquid-glass-button flex items-center gap-2 text-sm font-medium hover:text-gh-link transition-colors"
         title="Book a seminar"
       >
         <Mail size={14} />
         <span className="hidden md:inline">$7k Seminar</span>
-      </a>
+      </button>
 
       {/* Divider */}
       <div className="w-px h-6 bg-gh-border/50" />
@@ -111,5 +116,11 @@ export function Toolbar({ theme, setTheme, mode, setMode }: ToolbarProps) {
         <Github size={16} />
       </a>
     </div>
+
+    <SeminarModal
+      isOpen={showSeminarModal}
+      onClose={() => setShowSeminarModal(false)}
+    />
+    </>
   );
 }
