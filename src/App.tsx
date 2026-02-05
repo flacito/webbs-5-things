@@ -498,7 +498,7 @@ function App() {
             </div>
           )}
           <div className="mobile-toolbar-sticky">
-            <Toolbar theme={theme} setTheme={setTheme} mode={mode} setMode={setMode} isSticky />
+            <Toolbar theme={theme} setTheme={setTheme} mode={mode} setMode={setMode} />
           </div>
           <MobilePresentationView content={content} />
         </div>

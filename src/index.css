@@ -991,10 +991,20 @@ html.dark .mode-toggle button.active {
   -webkit-backdrop-filter: blur(8px);
 }
 
-.mobile-toolbar-sticky .toolbar-container {
-  position: relative !important;
-  top: auto !important;
-  left: auto !important;
+/* Override Tailwind's fixed positioning classes when inside sticky wrapper */
+.mobile-toolbar-sticky .toolbar-container.fixed {
+  position: static !important;
+}
+
+.mobile-toolbar-sticky .toolbar-container.top-4 {
+  top: unset !important;
+}
+
+.mobile-toolbar-sticky .toolbar-container.left-1\/2 {
+  left: unset !important;
+}
+
+.mobile-toolbar-sticky .toolbar-container.-translate-x-1\/2 {
   transform: none !important;
 }
 

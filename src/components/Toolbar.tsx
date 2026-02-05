@@ -10,10 +10,9 @@ interface ToolbarProps {
   setTheme: (t: Theme) => void;
   mode: ViewMode;
   setMode: (m: ViewMode) => void;
-  isSticky?: boolean; // When true, don't use fixed positioning (parent handles sticky)
 }
 
-export function Toolbar({ theme, setTheme, mode, setMode, isSticky = false }: ToolbarProps) {
+export function Toolbar({ theme, setTheme, mode, setMode }: ToolbarProps) {
   const [showSeminarModal, setShowSeminarModal] = useState(false);
 
   const goHome = () => {
@@ -21,13 +20,9 @@ export function Toolbar({ theme, setTheme, mode, setMode, isSticky = false }: To
     window.location.hash = '#/0';
   };
 
-  const positionClasses = isSticky
-    ? "" // Parent handles positioning
-    : "fixed top-4 left-1/2 -translate-x-1/2";
-
   return (
     <>
-    <div className={`toolbar-container ${positionClasses} z-50 liquid-glass px-2 sm:px-3 py-1.5 sm:py-2 flex items-center gap-1.5 sm:gap-3`}>
+    <div className="toolbar-container fixed top-4 left-1/2 -translate-x-1/2 z-50 liquid-glass px-2 sm:px-3 py-1.5 sm:py-2 flex items-center gap-1.5 sm:gap-3">
       {/* Theme toggle */}
       <div className="flex items-center gap-0.5 sm:gap-1">
         <button
