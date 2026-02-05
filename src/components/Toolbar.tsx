@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Sun, Moon, Monitor, BookOpen, Presentation, Mail, Home, Github } from "lucide-react";
+import { Sun, Moon, Monitor, BookOpen, Presentation, DollarSign, Home, Github } from "lucide-react";
 import { SeminarModal } from "./SeminarModal";
 
 type Theme = "dark" | "light" | "system";
@@ -99,7 +99,7 @@ export function Toolbar({ theme, setTheme, mode, setMode, isSticky = false }: To
         className="liquid-glass-button p-1.5 sm:p-2 flex items-center gap-1.5 sm:gap-2 text-sm font-medium hover:text-gh-link transition-colors"
         title="Book a seminar"
       >
-        <Mail className="w-4 h-4 sm:w-4 sm:h-4" />
+        <DollarSign className="w-4 h-4 sm:w-4 sm:h-4" />
         <span className="hidden md:inline">$7k Seminar</span>
       </button>
 
