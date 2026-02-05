@@ -8,9 +8,11 @@ import {
   X,
   ChevronRight,
   Link as LinkIcon,
+  RotateCcw,
 } from "lucide-react";
 import { Toolbar } from "./components/Toolbar";
 import { PresentationView } from "./components/PresentationView";
+import { MobilePresentationView } from "./components/MobilePresentationView";
 
 type Theme = "dark" | "light" | "system";
 type ViewMode = "presentation" | "reading";
@@ -285,6 +287,14 @@ function App() {
     null,
   );
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isSmallScreen, setIsSmallScreen] = useState(() => {
+    if (typeof window !== "undefined") {
+      // Only phones, not tablets (tablets get full Reveal.js slideshow)
+      return window.innerWidth <= 640 || window.innerHeight <= 480;
+    }
+    return false;
+  });
+  const [landscapePromptDismissed, setLandscapePromptDismissed] = useState(false);
   const [tocVisible, setTocVisible] = useState<boolean>(() => {
     if (typeof window !== "undefined") {
       const saved = localStorage.getItem("tocVisible");
@@ -326,6 +336,21 @@ function App() {
   useEffect(() => {
     localStorage.setItem("tocVisible", String(tocVisible));
   }, [tocVisible]);
+
+  // Detect small screen for mobile presentation view (phones only, not tablets)
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsSmallScreen(window.innerWidth <= 640 || window.innerHeight <= 480);
+    };
+
+    window.addEventListener("resize", checkScreenSize);
+    window.addEventListener("orientationchange", checkScreenSize);
+
+    return () => {
+      window.removeEventListener("resize", checkScreenSize);
+      window.removeEventListener("orientationchange", checkScreenSize);
+    };
+  }, []);
 
   // Save view mode to localStorage and reset to first slide when entering presentation
   useEffect(() => {
@@ -441,6 +466,27 @@ function App() {
 
   // Presentation mode
   if (mode === "presentation") {
+    // Mobile presentation uses sticky toolbar, desktop/tablet uses fixed Reveal.js
+    if (isSmallScreen) {
+      return (
+        <div className="mobile-presentation-wrapper">
+          {/* Portrait orientation prompt - shown when device is in landscape */}
+          {!landscapePromptDismissed && (
+            <div className="portrait-prompt show">
+              <RotateCcw size={48} />
+              <p>Rotate your device to portrait for the best viewing experience</p>
+              <button onClick={() => setLandscapePromptDismissed(true)}>
+                Continue anyway
+              </button>
+            </div>
+          )}
+          <div className="mobile-toolbar-sticky">
+            <Toolbar theme={theme} setTheme={setTheme} mode={mode} setMode={setMode} />
+          </div>
+          <MobilePresentationView content={content} />
+        </div>
+      );
+    }
     return (
       <>
         <Toolbar theme={theme} setTheme={setTheme} mode={mode} setMode={setMode} />

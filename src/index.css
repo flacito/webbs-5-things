@@ -908,32 +908,407 @@ html.dark .mode-toggle button.active {
     padding: 3.5rem 0.75rem 1.5rem 0.75rem;
   }
 
-  /* Even smaller toolbar */
+  /* Hide text labels on very small screens */
+  .mode-toggle button span.hidden {
+    display: none !important;
+  }
+}
+
+/* Mobile toolbar - ensure it fits and has good touch targets */
+.toolbar-container {
+  max-width: calc(100vw - 1rem);
+}
+
+@media (max-width: 640px) {
+  .toolbar-container {
+    top: 0.5rem;
+  }
+
   .liquid-glass {
-    padding: 0.25rem 0.375rem;
-    gap: 0.25rem;
-  }
-
-  .liquid-glass-button {
-    padding: 0.25rem 0.375rem;
-  }
-
-  .liquid-glass-button svg {
-    width: 14px;
-    height: 14px;
+    border-radius: 12px;
   }
 
   .mode-toggle {
     padding: 2px;
+    border-radius: 8px;
   }
 
   .mode-toggle button {
-    padding: 0.2rem 0.4rem;
-    font-size: 0.65rem;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    border-radius: 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .toolbar-container {
+    top: 0.375rem;
   }
 
-  /* Hide text labels on very small screens */
-  .mode-toggle button span.hidden {
-    display: none !important;
+  .liquid-glass {
+    border-radius: 10px;
+  }
+
+  .mode-toggle {
+    padding: 1.5px;
+    border-radius: 7px;
+  }
+
+  .mode-toggle button {
+    padding: 0.2rem 0.375rem;
+    font-size: 0.7rem;
+    border-radius: 5px;
+  }
+
+  .liquid-glass-button {
+    border-radius: 6px;
+  }
+}
+
+/* ===========================================
+   Mobile Presentation View (Scrolling Slides)
+   =========================================== */
+
+/* Mobile presentation wrapper */
+.mobile-presentation-wrapper {
+  width: 100%;
+  min-height: 100vh;
+  background: var(--gh-bg);
+}
+
+/* Sticky toolbar for mobile presentation */
+.mobile-toolbar-sticky {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  justify-content: center;
+  padding: 0.5rem 0;
+  background: var(--gh-bg);
+}
+
+.mobile-toolbar-sticky .toolbar-container {
+  position: relative;
+  top: auto;
+  left: auto;
+  transform: none;
+}
+
+.mobile-presentation {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.mobile-slide {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100svh; /* Small viewport height */
+  padding: 1.5rem 1.5rem 3rem 1.5rem;
+  border-bottom: 1px solid var(--gh-border);
+  box-sizing: border-box;
+}
+
+@supports (min-height: 100dvh) {
+  .mobile-slide {
+    min-height: 100dvh;
+  }
+}
+
+.mobile-slide:last-child {
+  border-bottom: none;
+}
+
+.mobile-slide-content {
+  max-width: 100%;
+  text-align: left;
+}
+
+/* Typography for mobile slides */
+.mobile-slide-content h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--gh-heading);
+  line-height: 1.1;
+  margin-bottom: 0.5em;
+}
+
+.mobile-slide-content h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--gh-heading);
+  line-height: 1.2;
+  margin-bottom: 0.5em;
+}
+
+.mobile-slide-content h3 {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--gh-text);
+  opacity: 0.7;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+}
+
+.mobile-slide-content h4 {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--gh-text);
+  opacity: 0.7;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+}
+
+.mobile-slide-content p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--gh-text);
+  margin-bottom: 0.75em;
+}
+
+.mobile-slide-content ul,
+.mobile-slide-content ol {
+  margin-left: 1.25em;
+  margin-bottom: 1em;
+}
+
+.mobile-slide-content li {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--gh-text);
+  margin-bottom: 0.35em;
+  list-style-type: disc;
+}
+
+.mobile-slide-content ul ul li {
+  font-size: 0.9rem;
+  list-style-type: circle;
+}
+
+.mobile-slide-content strong {
+  color: var(--gh-green);
+}
+
+.mobile-slide-content em {
+  color: var(--gh-yellow);
+}
+
+.mobile-slide-content a {
+  color: var(--gh-link);
+}
+
+.mobile-slide-content pre {
+  background: var(--gh-bg-secondary);
+  border: 1px solid var(--gh-border);
+  border-radius: 6px;
+  padding: 0.75em;
+  overflow-x: auto;
+  font-size: 0.75rem;
+  margin: 0.5em 0;
+}
+
+.mobile-slide-content code {
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+}
+
+.mobile-slide-content :not(pre) > code {
+  background-color: var(--gh-code-bg);
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.85em;
+}
+
+.mobile-slide-content blockquote {
+  border-left: 4px solid var(--gh-accent);
+  background-color: rgba(31, 111, 235, 0.1);
+  padding: 0.75rem 1rem;
+  margin: 1rem 0;
+  border-radius: 0 6px 6px 0;
+}
+
+.mobile-slide-content blockquote p {
+  margin-bottom: 0;
+}
+
+/* Attention-getters for mobile slides */
+.mobile-slide-content attention-getter-1 {
+  display: block;
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--gh-heading);
+  line-height: 1.1;
+  margin: 0.5em 0;
+}
+
+.mobile-slide-content attention-getter-2 {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--gh-heading);
+  line-height: 1.2;
+  margin: 0.5em 0;
+}
+
+.mobile-slide-content attention-getter-3 {
+  display: block;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--gh-heading);
+  line-height: 1.3;
+  margin: 0.5em 0;
+}
+
+.mobile-slide-content attention-getter-4 {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--gh-heading);
+  line-height: 1.4;
+  margin: 0.5em 0;
+}
+
+.mobile-slide-content attention-getter-5 {
+  display: block;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--gh-heading);
+  line-height: 1.5;
+  margin: 0.5em 0;
+}
+
+/* Slide footer with number and next link */
+.mobile-slide-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--gh-border);
+}
+
+.mobile-slide-number {
+  font-size: 0.75rem;
+  color: var(--gh-text);
+  opacity: 0.5;
+  font-weight: 500;
+}
+
+/* Next slide link */
+.mobile-slide-next {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--gh-link);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.mobile-slide-next:hover {
+  opacity: 0.7;
+}
+
+/* Appendix slide - scrollable content area */
+.mobile-slide-appendix {
+  min-height: auto;
+  padding: 2rem 1.5rem 4rem 1.5rem;
+}
+
+.mobile-slide-appendix .mobile-slide-content {
+  max-width: 48rem;
+  margin: 0 auto;
+}
+
+/* Landscape mode optimization */
+@media (orientation: landscape) and (max-height: 500px) {
+  .mobile-slide {
+    min-height: auto;
+    padding: 1.5rem 2rem;
+  }
+
+  .mobile-slide-content h1 {
+    font-size: 1.5rem;
+  }
+
+  .mobile-slide-content h2 {
+    font-size: 1.25rem;
+  }
+
+  .mobile-slide-content p {
+    font-size: 0.9rem;
+  }
+
+  .mobile-slide-content li {
+    font-size: 0.85rem;
+  }
+
+  .mobile-slide-content attention-getter-1 {
+    font-size: 1.5rem;
+  }
+
+  .mobile-slide-content attention-getter-2 {
+    font-size: 1.25rem;
+  }
+
+  .mobile-slide-content attention-getter-3 {
+    font-size: 1.1rem;
+  }
+}
+
+/* Portrait orientation prompt for mobile (shown when in landscape) */
+.portrait-prompt {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--gh-bg);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  text-align: center;
+  padding: 2rem;
+}
+
+.portrait-prompt svg {
+  color: var(--gh-accent);
+  animation: rotate-hint 2s ease-in-out infinite;
+}
+
+.portrait-prompt p {
+  color: var(--gh-text);
+  font-size: 1.1rem;
+  max-width: 280px;
+}
+
+.portrait-prompt button {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  color: var(--gh-link);
+  background: none;
+  border: 1px solid var(--gh-border);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+@keyframes rotate-hint {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-15deg); }
+  75% { transform: rotate(15deg); }
+}
+
+/* Show portrait prompt only on small landscape screens */
+@media screen and (max-height: 480px) and (orientation: landscape) {
+  .portrait-prompt.show {
+    display: flex;
   }
 }

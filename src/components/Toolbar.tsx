@@ -22,34 +22,34 @@ export function Toolbar({ theme, setTheme, mode, setMode }: ToolbarProps) {
 
   return (
     <>
-    <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 liquid-glass px-3 py-2 flex items-center gap-3">
+    <div className="toolbar-container fixed top-4 left-1/2 -translate-x-1/2 z-50 liquid-glass px-2 sm:px-3 py-1.5 sm:py-2 flex items-center gap-1.5 sm:gap-3">
       {/* Theme toggle */}
-      <div className="flex items-center gap-1">
+      <div className="flex items-center gap-0.5 sm:gap-1">
         <button
           onClick={() => setTheme("dark")}
-          className={`liquid-glass-button p-2 ${theme === "dark" ? "active" : ""}`}
+          className={`liquid-glass-button p-1.5 sm:p-2 ${theme === "dark" ? "active" : ""}`}
           title="Dark mode"
         >
-          <Moon size={16} />
+          <Moon className="w-4 h-4 sm:w-4 sm:h-4" />
         </button>
         <button
           onClick={() => setTheme("system")}
-          className={`liquid-glass-button p-2 ${theme === "system" ? "active" : ""}`}
+          className={`liquid-glass-button p-1.5 sm:p-2 hidden xs:block ${theme === "system" ? "active" : ""}`}
           title="System preference"
         >
-          <Monitor size={16} />
+          <Monitor className="w-4 h-4 sm:w-4 sm:h-4" />
         </button>
         <button
           onClick={() => setTheme("light")}
-          className={`liquid-glass-button p-2 ${theme === "light" ? "active" : ""}`}
+          className={`liquid-glass-button p-1.5 sm:p-2 ${theme === "light" ? "active" : ""}`}
           title="Light mode"
         >
-          <Sun size={16} />
+          <Sun className="w-4 h-4 sm:w-4 sm:h-4" />
         </button>
       </div>
 
       {/* Divider */}
-      <div className="w-px h-6 bg-gh-border/50" />
+      <div className="w-px h-5 sm:h-6 bg-gh-border/50" />
 
       {/* Mode toggle */}
       <div className="mode-toggle">
@@ -58,8 +58,8 @@ export function Toolbar({ theme, setTheme, mode, setMode }: ToolbarProps) {
           className={mode === "presentation" ? "active" : ""}
           title="Presentation mode"
         >
-          <span className="flex items-center gap-1.5">
-            <Presentation size={14} />
+          <span className="flex items-center gap-1 sm:gap-1.5">
+            <Presentation className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             <span className="hidden sm:inline">Present</span>
           </span>
         </button>
@@ -68,8 +68,8 @@ export function Toolbar({ theme, setTheme, mode, setMode }: ToolbarProps) {
           className={mode === "reading" ? "active" : ""}
           title="Reading mode"
         >
-          <span className="flex items-center gap-1.5">
-            <BookOpen size={14} />
+          <span className="flex items-center gap-1 sm:gap-1.5">
+            <BookOpen className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             <span className="hidden sm:inline">Read</span>
           </span>
         </button>
@@ -78,42 +78,42 @@ export function Toolbar({ theme, setTheme, mode, setMode }: ToolbarProps) {
       {/* Home button - only in presentation mode */}
       {mode === "presentation" && (
         <>
-          <div className="w-px h-6 bg-gh-border/50" />
+          <div className="w-px h-5 sm:h-6 bg-gh-border/50" />
           <button
             onClick={goHome}
-            className="liquid-glass-button p-2"
+            className="liquid-glass-button p-1.5 sm:p-2"
             title="Go to first slide (Home)"
           >
-            <Home size={16} />
+            <Home className="w-4 h-4 sm:w-4 sm:h-4" />
           </button>
         </>
       )}
 
-      {/* Divider */}
-      <div className="w-px h-6 bg-gh-border/50" />
+      {/* Divider - hidden on very small screens */}
+      <div className="w-px h-5 sm:h-6 bg-gh-border/50 hidden xs:block" />
 
       {/* Seminar callout */}
       <button
         onClick={() => setShowSeminarModal(true)}
-        className="liquid-glass-button flex items-center gap-2 text-sm font-medium hover:text-gh-link transition-colors"
+        className="liquid-glass-button p-1.5 sm:p-2 flex items-center gap-1.5 sm:gap-2 text-sm font-medium hover:text-gh-link transition-colors"
         title="Book a seminar"
       >
-        <Mail size={14} />
+        <Mail className="w-4 h-4 sm:w-4 sm:h-4" />
         <span className="hidden md:inline">$7k Seminar</span>
       </button>
 
-      {/* Divider */}
-      <div className="w-px h-6 bg-gh-border/50" />
+      {/* Divider - hidden on small screens */}
+      <div className="w-px h-5 sm:h-6 bg-gh-border/50 hidden sm:block" />
 
-      {/* GitHub repo link */}
+      {/* GitHub repo link - hidden on very small screens */}
       <a
         href="https://github.com/flacito/webbs-5-things"
         target="_blank"
         rel="noopener noreferrer"
-        className="liquid-glass-button p-2 hover:text-gh-link transition-colors"
+        className="liquid-glass-button p-1.5 sm:p-2 hover:text-gh-link transition-colors hidden xs:flex"
         title="Fork me!"
       >
-        <Github size={16} />
+        <Github className="w-4 h-4 sm:w-4 sm:h-4" />
       </a>
     </div>
 

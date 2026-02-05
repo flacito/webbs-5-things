@@ -10,6 +10,9 @@ export default {
         '2xl': '1400px',
       },
     },
+    screens: {
+      'xs': '480px',
+    },
     extend: {
       colors: {
         // GitHub theme colors via CSS variables
