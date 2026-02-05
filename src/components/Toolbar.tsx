@@ -10,9 +10,10 @@ interface ToolbarProps {
   setTheme: (t: Theme) => void;
   mode: ViewMode;
   setMode: (m: ViewMode) => void;
+  isSticky?: boolean;
 }
 
-export function Toolbar({ theme, setTheme, mode, setMode }: ToolbarProps) {
+export function Toolbar({ theme, setTheme, mode, setMode, isSticky = false }: ToolbarProps) {
   const [showSeminarModal, setShowSeminarModal] = useState(false);
 
   const goHome = () => {
@@ -22,7 +23,7 @@ export function Toolbar({ theme, setTheme, mode, setMode }: ToolbarProps) {
 
   return (
     <>
-    <div className="toolbar-container fixed top-4 left-1/2 -translate-x-1/2 z-50 liquid-glass px-2 sm:px-3 py-1.5 sm:py-2 flex items-center gap-1.5 sm:gap-3">
+    <div className={`toolbar-container z-50 liquid-glass px-2 sm:px-3 py-1.5 sm:py-2 flex items-center gap-1.5 sm:gap-3 ${isSticky ? "" : "fixed top-4 left-1/2 -translate-x-1/2"}`}>
       {/* Theme toggle */}
       <div className="flex items-center gap-0.5 sm:gap-1">
         <button
