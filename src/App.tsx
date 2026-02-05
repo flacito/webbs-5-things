@@ -447,6 +447,15 @@ function App() {
               <ThemeToggle theme={theme} setTheme={setTheme} />
             </div>
 
+            {/* Seminar callout */}
+            <a
+              href="mailto:brian@kingslandacademy.com?subject=Webb's 5 Things Seminar"
+              className="block mb-4 p-3 text-xs bg-gh-bg-secondary/50 border border-gh-border rounded-lg hover:border-gh-link transition-colors"
+            >
+              <p className="font-medium text-gh-heading mb-1">5 Things Seminar</p>
+              <p className="text-gh-text/70">Full-day mentoring: context to launch in 1-3 sessions. $7k/day.</p>
+            </a>
+
             {/* ToC with integrated toggle */}
             <TableOfContents
               sections={tocSections}
