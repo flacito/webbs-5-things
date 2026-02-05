@@ -992,10 +992,10 @@ html.dark .mode-toggle button.active {
 }
 
 .mobile-toolbar-sticky .toolbar-container {
-  position: relative;
-  top: auto;
-  left: auto;
-  transform: none;
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  transform: none !important;
 }
 
 .mobile-presentation {
