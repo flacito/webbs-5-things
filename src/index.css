@@ -974,10 +974,12 @@ html.dark .mode-toggle button.active {
   width: 100%;
   min-height: 100vh;
   background: var(--gh-bg);
+  overflow-x: hidden; /* Allow vertical scroll for sticky to work */
 }
 
 /* Sticky toolbar for mobile presentation */
 .mobile-toolbar-sticky {
+  position: -webkit-sticky; /* Safari support */
   position: sticky;
   top: 0;
   z-index: 50;
@@ -985,6 +987,8 @@ html.dark .mode-toggle button.active {
   justify-content: center;
   padding: 0.5rem 0;
   background: var(--gh-bg);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .mobile-toolbar-sticky .toolbar-container {
