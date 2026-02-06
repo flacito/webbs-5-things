@@ -1,8 +1,9 @@
-import { useMemo } from "react";
+import { useMemo, useState, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
 import rehypeRaw from "rehype-raw";
+import { ChevronDown } from "lucide-react";
 import { SeminarCTA } from "./SeminarCTA";
 
 interface Slide {
@@ -72,6 +73,44 @@ interface MobilePresentationViewProps {
 
 export function MobilePresentationView({ content }: MobilePresentationViewProps) {
   const slides = useMemo(() => parseMarkdownToSlides(content), [content]);
+  const [showScrollIndicator, setShowScrollIndicator] = useState(false);
+  const [hasScrolled, setHasScrolled] = useState(false);
+
+  // Scroll indicator: show after 5s, pulse for 3s, repeat until scroll
+  useEffect(() => {
+    if (hasScrolled) return;
+
+    let timeoutId: number;
+    const startCycle = () => {
+      // Wait 5 seconds, then show for 3 seconds
+      timeoutId = window.setTimeout(() => {
+        if (!hasScrolled) {
+          setShowScrollIndicator(true);
+          timeoutId = window.setTimeout(() => {
+            setShowScrollIndicator(false);
+            // Restart the cycle
+            startCycle();
+          }, 3000);
+        }
+      }, 5000);
+    };
+
+    startCycle();
+    return () => window.clearTimeout(timeoutId);
+  }, [hasScrolled]);
+
+  // Hide indicator on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setHasScrolled(true);
+        setShowScrollIndicator(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <div className="mobile-presentation">
@@ -95,6 +134,12 @@ export function MobilePresentationView({ content }: MobilePresentationViewProps)
           </div>
         </div>
       ))}
+      {/* Scroll indicator */}
+      {showScrollIndicator && !hasScrolled && (
+        <div className="scroll-indicator">
+          <ChevronDown size={28} />
+        </div>
+      )}
     </div>
   );
 }

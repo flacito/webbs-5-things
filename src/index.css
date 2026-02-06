@@ -1364,3 +1364,33 @@ html.dark .mode-toggle button.active {
   bottom: 2rem;
   right: 6rem;
 }
+
+/* Mobile scroll indicator */
+.scroll-indicator {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: var(--gh-accent);
+  color: white;
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  animation: scrollPulse 1s ease-in-out infinite;
+  z-index: 100;
+}
+
+@keyframes scrollPulse {
+  0%, 100% {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(-50%) translateY(8px);
+    opacity: 0.7;
+  }
+}
