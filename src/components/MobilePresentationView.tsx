@@ -1,9 +1,8 @@
-import { useMemo, useCallback } from "react";
+import { useMemo } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
 import rehypeRaw from "rehype-raw";
-import { ChevronDown, ChevronUp } from "lucide-react";
 import { SeminarCTA } from "./SeminarCTA";
 
 interface Slide {
@@ -74,19 +73,11 @@ interface MobilePresentationViewProps {
 export function MobilePresentationView({ content }: MobilePresentationViewProps) {
   const slides = useMemo(() => parseMarkdownToSlides(content), [content]);
 
-  const scrollToSlide = useCallback((slideIndex: number) => {
-    const slideElement = document.getElementById(`mobile-slide-${slideIndex}`);
-    if (slideElement) {
-      slideElement.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  }, []);
-
   return (
     <div className="mobile-presentation">
       {slides.map((slide, i) => (
         <div
           key={i}
-          id={`mobile-slide-${i}`}
           className={`mobile-slide ${slide.isAppendix ? "mobile-slide-appendix" : ""}`}
         >
           <div className="mobile-slide-content">
@@ -102,34 +93,6 @@ export function MobilePresentationView({ content }: MobilePresentationViewProps)
               </div>
             )}
           </div>
-          {!slide.isAppendix && (
-            <div className="mobile-slide-footer">
-              {i > 0 ? (
-                <button
-                  onClick={() => scrollToSlide(i - 1)}
-                  className="mobile-slide-prev"
-                  aria-label="Previous slide"
-                >
-                  <ChevronUp size={14} />
-                  <span>Prev</span>
-                </button>
-              ) : (
-                <div className="mobile-slide-number">
-                  {i + 1} / {slides.length}
-                </div>
-              )}
-              {i < slides.length - 1 && (
-                <button
-                  onClick={() => scrollToSlide(i + 1)}
-                  className="mobile-slide-next"
-                  aria-label="Next slide"
-                >
-                  <span>Next</span>
-                  <ChevronDown size={14} />
-                </button>
-              )}
-            </div>
-          )}
         </div>
       ))}
     </div>
