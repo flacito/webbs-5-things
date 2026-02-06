@@ -1357,9 +1357,9 @@ html.dark .mode-toggle button.active {
   margin-top: 1.5rem;
 }
 
-/* Desktop (Reveal.js): bottom left */
+/* Desktop (Reveal.js): bottom right */
 .reveal .seminar-cta-wrapper {
   position: absolute;
   bottom: 2rem;
-  left: 6rem;
+  right: 6rem;
 }
