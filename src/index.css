@@ -1009,6 +1009,7 @@ html.dark .mode-toggle button.active {
   min-height: calc(var(--mobile-vh, 100vh) - 3.5rem);
   padding: 1.5rem;
   padding-right: 2.5rem; /* Space for progress dots */
+  padding-bottom: 3rem; /* Gap at end of each slide */
   box-sizing: border-box;
   scroll-snap-align: start;
   scroll-snap-stop: always;

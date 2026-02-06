@@ -22,7 +22,8 @@ function parseMarkdownToSlides(markdown: string): Slide[] {
     appendixContent = markdown.slice(appendixMatch.index + appendixMatch[0].length).trim();
   }
 
-  // Split on # (h1), ## (h2), and <slidebreak />
+  // Mobile: Only break on ## (H2) headings and <slidebreak />
+  // H1 stays with content until first H2, H3/H4/etc stay within their H2 section
   const lines = slideMarkdown.split("\n");
   const slides: Slide[] = [];
   let currentContent: string[] = [];
@@ -36,15 +37,14 @@ function parseMarkdownToSlides(markdown: string): Slide[] {
   };
 
   for (const line of lines) {
-    if (line.startsWith("# ") && !line.startsWith("## ")) {
-      flushSlide();
-      currentContent.push(line);
-    } else if (line.startsWith("## ")) {
+    // Only H2 creates a new slide break
+    if (line.startsWith("## ")) {
       flushSlide();
       currentContent.push(line);
     } else if (line.trim().match(/^<slidebreak\s*\/?>/i)) {
       flushSlide();
     } else {
+      // Everything else (H1, H3, H4, paragraphs, etc.) stays in current slide
       currentContent.push(line);
     }
   }
