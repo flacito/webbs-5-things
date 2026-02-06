@@ -1,4 +1,4 @@
-import { useMemo, useState, useEffect } from "react";
+import { useMemo, useState, useEffect, useRef } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
@@ -36,30 +36,21 @@ function parseMarkdownToSlides(markdown: string): Slide[] {
   };
 
   for (const line of lines) {
-    // Check for h1 (title slide) - new slide
     if (line.startsWith("# ") && !line.startsWith("## ")) {
       flushSlide();
       currentContent.push(line);
-    }
-    // Check for h2 (main section) - new slide
-    else if (line.startsWith("## ")) {
+    } else if (line.startsWith("## ")) {
       flushSlide();
       currentContent.push(line);
-    }
-    // Check for <slidebreak /> marker - new slide without heading
-    else if (line.trim().match(/^<slidebreak\s*\/?>/i)) {
+    } else if (line.trim().match(/^<slidebreak\s*\/?>/i)) {
       flushSlide();
-    }
-    // Everything else stays on current slide
-    else {
+    } else {
       currentContent.push(line);
     }
   }
 
-  // Don't forget the last slide
   flushSlide();
 
-  // Add appendix as final slide if it exists
   if (appendixContent) {
     slides.push({ content: appendixContent, isAppendix: true });
   }
@@ -73,53 +64,74 @@ interface MobilePresentationViewProps {
 
 export function MobilePresentationView({ content }: MobilePresentationViewProps) {
   const slides = useMemo(() => parseMarkdownToSlides(content), [content]);
-  const [showArrow, setShowArrow] = useState(false);
-  const [hasScrolled, setHasScrolled] = useState(false);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [hasInteracted, setHasInteracted] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const slideRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  // Arrow indicator: show after 5s, pulse for 3s, repeat until scroll
+  // Track current slide with Intersection Observer
   useEffect(() => {
-    if (hasScrolled) return;
+    const container = containerRef.current;
+    if (!container) return;
 
-    let timeoutId: number;
-    const startCycle = () => {
-      // Wait 5 seconds, then show arrow for 3 seconds
-      timeoutId = window.setTimeout(() => {
-        if (!hasScrolled) {
-          setShowArrow(true);
-          timeoutId = window.setTimeout(() => {
-            setShowArrow(false);
-            // Restart the cycle
-            startCycle();
-          }, 3000);
-        }
-      }, 5000);
-    };
-
-    startCycle();
-    return () => window.clearTimeout(timeoutId);
-  }, [hasScrolled]);
-
-  // Hide indicator on scroll
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setHasScrolled(true);
-        setShowArrow(false);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = slideRefs.current.indexOf(entry.target as HTMLDivElement);
+            if (index !== -1) {
+              setCurrentSlide(index);
+            }
+          }
+        });
+      },
+      {
+        root: container,
+        threshold: 0.6, // Slide is "current" when 60% visible
       }
+    );
+
+    slideRefs.current.forEach((slide) => {
+      if (slide) observer.observe(slide);
+    });
+
+    return () => observer.disconnect();
+  }, [slides.length]);
+
+  // Detect first interaction (scroll or touch)
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container || hasInteracted) return;
+
+    const handleInteraction = () => {
+      setHasInteracted(true);
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    container.addEventListener("scroll", handleInteraction, { passive: true, once: true });
+    container.addEventListener("touchstart", handleInteraction, { passive: true, once: true });
+
+    return () => {
+      container.removeEventListener("scroll", handleInteraction);
+      container.removeEventListener("touchstart", handleInteraction);
+    };
+  }, [hasInteracted]);
+
+  const scrollToSlide = (index: number) => {
+    slideRefs.current[index]?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  // Only show regular slides in the progress dots (not appendix)
+  const mainSlides = slides.filter(s => !s.isAppendix);
 
   return (
-    <div className="mobile-presentation">
+    <div className="mobile-snap-container" ref={containerRef}>
       {slides.map((slide, i) => (
         <div
           key={i}
-          className={`mobile-slide ${slide.isAppendix ? "mobile-slide-appendix" : ""}`}
+          ref={(el) => (slideRefs.current[i] = el)}
+          className={`mobile-snap-slide ${slide.isAppendix ? "mobile-snap-slide-appendix" : ""}`}
         >
-          <div className="mobile-slide-content">
+          <div className="mobile-snap-content">
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}
               rehypePlugins={[rehypeRaw, rehypeHighlight]}
@@ -134,13 +146,24 @@ export function MobilePresentationView({ content }: MobilePresentationViewProps)
           </div>
         </div>
       ))}
-      {/* Scroll indicator - text always visible, arrow appears on timer */}
-      {!hasScrolled && (
-        <div className={`scroll-indicator ${showArrow ? "with-arrow" : ""}`}>
-          <span className="scroll-indicator-text">Scroll down...</span>
-          {showArrow && (
-            <ChevronDown size={24} className="scroll-indicator-arrow" />
-          )}
+
+      {/* Progress dots - fixed on right side */}
+      <div className="mobile-progress-dots">
+        {mainSlides.map((_, i) => (
+          <button
+            key={i}
+            className={`mobile-progress-dot ${i === currentSlide ? "active" : ""}`}
+            onClick={() => scrollToSlide(i)}
+            aria-label={`Go to slide ${i + 1}`}
+          />
+        ))}
+      </div>
+
+      {/* Scroll hint - only on first slide before interaction */}
+      {currentSlide === 0 && !hasInteracted && (
+        <div className="mobile-scroll-hint">
+          <span>Swipe up</span>
+          <ChevronDown size={20} />
         </div>
       )}
     </div>

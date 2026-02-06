@@ -993,33 +993,37 @@ html.dark .mode-toggle button.active {
 }
 
 
-.mobile-presentation {
+/* Scroll-snap container for mobile presentation */
+.mobile-snap-container {
   width: 100%;
-  min-height: 100vh;
+  height: calc(var(--mobile-vh, 100vh) - 3.5rem);
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-snap-type: y mandatory;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
 }
 
-.mobile-slide {
+.mobile-snap-slide {
   width: 100%;
-  min-height: calc(var(--mobile-vh, 100vh) - 3.5rem); /* Subtract toolbar height */
-  padding: 1rem 1.5rem 1.5rem 1.5rem;
-  border-bottom: 1px solid var(--gh-border);
+  min-height: calc(var(--mobile-vh, 100vh) - 3.5rem);
+  padding: 1.5rem;
+  padding-right: 2.5rem; /* Space for progress dots */
   box-sizing: border-box;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
   display: flex;
   flex-direction: column;
 }
 
-.mobile-slide:last-child {
-  border-bottom: none;
-}
-
-.mobile-slide-content {
+.mobile-snap-content {
   max-width: 100%;
   text-align: left;
-  flex: 1; /* Grow to fill available space, pushing footer to bottom */
+  flex: 1;
 }
 
 /* Typography for mobile slides */
-.mobile-slide-content h1 {
+.mobile-snap-content h1 {
   font-size: 2rem;
   font-weight: 800;
   color: var(--gh-heading);
@@ -1027,7 +1031,7 @@ html.dark .mode-toggle button.active {
   margin-bottom: 0.5em;
 }
 
-.mobile-slide-content h2 {
+.mobile-snap-content h2 {
   font-size: 1.5rem;
   font-weight: 700;
   color: var(--gh-heading);
@@ -1035,7 +1039,7 @@ html.dark .mode-toggle button.active {
   margin-bottom: 0.5em;
 }
 
-.mobile-slide-content h3 {
+.mobile-snap-content h3 {
   font-size: 1rem;
   font-weight: 500;
   color: var(--gh-text);
@@ -1046,7 +1050,7 @@ html.dark .mode-toggle button.active {
   margin-bottom: 0.5em;
 }
 
-.mobile-slide-content h4 {
+.mobile-snap-content h4 {
   font-size: 0.95rem;
   font-weight: 500;
   color: var(--gh-text);
@@ -1057,20 +1061,20 @@ html.dark .mode-toggle button.active {
   margin-bottom: 0.5em;
 }
 
-.mobile-slide-content p {
+.mobile-snap-content p {
   font-size: 1rem;
   line-height: 1.6;
   color: var(--gh-text);
   margin-bottom: 0.75em;
 }
 
-.mobile-slide-content ul,
-.mobile-slide-content ol {
+.mobile-snap-content ul,
+.mobile-snap-content ol {
   margin-left: 1.25em;
   margin-bottom: 1em;
 }
 
-.mobile-slide-content li {
+.mobile-snap-content li {
   font-size: 0.95rem;
   line-height: 1.5;
   color: var(--gh-text);
@@ -1078,24 +1082,24 @@ html.dark .mode-toggle button.active {
   list-style-type: disc;
 }
 
-.mobile-slide-content ul ul li {
+.mobile-snap-content ul ul li {
   font-size: 0.9rem;
   list-style-type: circle;
 }
 
-.mobile-slide-content strong {
+.mobile-snap-content strong {
   color: var(--gh-green);
 }
 
-.mobile-slide-content em {
+.mobile-snap-content em {
   color: var(--gh-yellow);
 }
 
-.mobile-slide-content a {
+.mobile-snap-content a {
   color: var(--gh-link);
 }
 
-.mobile-slide-content pre {
+.mobile-snap-content pre {
   background: var(--gh-bg-secondary);
   border: 1px solid var(--gh-border);
   border-radius: 6px;
@@ -1106,22 +1110,22 @@ html.dark .mode-toggle button.active {
   color: var(--gh-text);
 }
 
-.mobile-slide-content pre code {
+.mobile-snap-content pre code {
   color: inherit;
 }
 
-.mobile-slide-content code {
+.mobile-snap-content code {
   font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
 }
 
-.mobile-slide-content :not(pre) > code {
+.mobile-snap-content :not(pre) > code {
   background-color: var(--gh-code-bg);
   padding: 0.2rem 0.4rem;
   border-radius: 4px;
   font-size: 0.85em;
 }
 
-.mobile-slide-content blockquote {
+.mobile-snap-content blockquote {
   border-left: 4px solid var(--gh-accent);
   background-color: rgba(31, 111, 235, 0.1);
   padding: 0.75rem 1rem;
@@ -1129,12 +1133,12 @@ html.dark .mode-toggle button.active {
   border-radius: 0 6px 6px 0;
 }
 
-.mobile-slide-content blockquote p {
+.mobile-snap-content blockquote p {
   margin-bottom: 0;
 }
 
 /* Attention-getters for mobile slides */
-.mobile-slide-content attention-getter-1 {
+.mobile-snap-content attention-getter-1 {
   display: block;
   font-size: 2rem;
   font-weight: 800;
@@ -1143,7 +1147,7 @@ html.dark .mode-toggle button.active {
   margin: 0.5em 0;
 }
 
-.mobile-slide-content attention-getter-2 {
+.mobile-snap-content attention-getter-2 {
   display: block;
   font-size: 1.5rem;
   font-weight: 700;
@@ -1152,7 +1156,7 @@ html.dark .mode-toggle button.active {
   margin: 0.5em 0;
 }
 
-.mobile-slide-content attention-getter-3 {
+.mobile-snap-content attention-getter-3 {
   display: block;
   font-size: 1.25rem;
   font-weight: 600;
@@ -1161,7 +1165,7 @@ html.dark .mode-toggle button.active {
   margin: 0.5em 0;
 }
 
-.mobile-slide-content attention-getter-4 {
+.mobile-snap-content attention-getter-4 {
   display: block;
   font-size: 1.1rem;
   font-weight: 600;
@@ -1170,7 +1174,7 @@ html.dark .mode-toggle button.active {
   margin: 0.5em 0;
 }
 
-.mobile-slide-content attention-getter-5 {
+.mobile-snap-content attention-getter-5 {
   display: block;
   font-size: 1rem;
   font-weight: 600;
@@ -1179,101 +1183,136 @@ html.dark .mode-toggle button.active {
   margin: 0.5em 0;
 }
 
-/* Slide footer with number and next link */
-.mobile-slide-footer {
+/* Progress dots - fixed on right side */
+.mobile-progress-dots {
+  position: fixed;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: auto; /* Push to bottom of flex container */
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--gh-border);
+  flex-direction: column;
+  gap: 0.5rem;
+  z-index: 100;
+  padding: 0.5rem;
 }
 
-.mobile-slide-number {
-  font-size: 0.75rem;
+.mobile-progress-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--gh-text);
+  opacity: 0.25;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mobile-progress-dot:hover {
+  opacity: 0.5;
+  transform: scale(1.2);
+}
+
+.mobile-progress-dot.active {
+  opacity: 1;
+  background: var(--gh-accent);
+  transform: scale(1.3);
+}
+
+/* Scroll hint - bottom center */
+.mobile-scroll-hint {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  z-index: 100;
+  animation: hintFadeIn 0.5s ease-out;
+}
+
+.mobile-scroll-hint span {
+  font-size: 0.8rem;
+  font-weight: 500;
   color: var(--gh-text);
   opacity: 0.5;
-  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
-/* Next slide link */
-.mobile-slide-next {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.25rem;
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: var(--gh-link);
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  transition: opacity 0.2s ease;
+.mobile-scroll-hint svg {
+  color: var(--gh-accent);
+  opacity: 0.8;
+  animation: hintBounce 1.5s ease-in-out infinite;
 }
 
-.mobile-slide-next:hover,
-.mobile-slide-prev:hover {
-  opacity: 0.7;
+@keyframes hintFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
 }
 
-/* Previous slide link */
-.mobile-slide-prev {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.25rem;
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: var(--gh-link);
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  transition: opacity 0.2s ease;
+@keyframes hintBounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(6px);
+  }
 }
 
 /* Appendix slide - scrollable content area */
-.mobile-slide-appendix {
+.mobile-snap-slide-appendix {
   min-height: auto;
+  scroll-snap-align: start;
   padding: 2rem 1.5rem 4rem 1.5rem;
 }
 
-.mobile-slide-appendix .mobile-slide-content {
+.mobile-snap-slide-appendix .mobile-snap-content {
   max-width: 48rem;
   margin: 0 auto;
 }
 
 /* Landscape mode optimization */
 @media (orientation: landscape) and (max-height: 500px) {
-  .mobile-slide {
+  .mobile-snap-slide {
     min-height: auto;
     padding: 1.5rem 2rem;
+    padding-right: 2.5rem;
   }
 
-  .mobile-slide-content h1 {
+  .mobile-snap-content h1 {
     font-size: 1.5rem;
   }
 
-  .mobile-slide-content h2 {
+  .mobile-snap-content h2 {
     font-size: 1.25rem;
   }
 
-  .mobile-slide-content p {
+  .mobile-snap-content p {
     font-size: 0.9rem;
   }
 
-  .mobile-slide-content li {
+  .mobile-snap-content li {
     font-size: 0.85rem;
   }
 
-  .mobile-slide-content attention-getter-1 {
+  .mobile-snap-content attention-getter-1 {
     font-size: 1.5rem;
   }
 
-  .mobile-slide-content attention-getter-2 {
+  .mobile-snap-content attention-getter-2 {
     font-size: 1.25rem;
   }
 
-  .mobile-slide-content attention-getter-3 {
+  .mobile-snap-content attention-getter-3 {
     font-size: 1.1rem;
   }
 }
@@ -1352,7 +1391,7 @@ html.dark .mode-toggle button.active {
 }
 
 /* Mobile: bottom center */
-.mobile-slide .seminar-cta-wrapper {
+.mobile-snap-slide .seminar-cta-wrapper {
   display: flex;
   justify-content: center;
   margin-top: 1.5rem;
@@ -1365,41 +1404,3 @@ html.dark .mode-toggle button.active {
   right: 6rem;
 }
 
-/* Mobile scroll indicator */
-.scroll-indicator {
-  position: fixed;
-  bottom: 2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.25rem;
-  z-index: 100;
-  transition: transform 0.3s ease;
-}
-
-.scroll-indicator.with-arrow {
-  transform: translateX(-50%) translateY(-8px);
-}
-
-.scroll-indicator-text {
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: var(--gh-text);
-  opacity: 0.6;
-}
-
-.scroll-indicator-arrow {
-  color: var(--gh-accent);
-  animation: arrowBounce 0.6s ease-in-out infinite;
-}
-
-@keyframes arrowBounce {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(6px);
-  }
-}
