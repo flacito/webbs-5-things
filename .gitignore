@@ -25,3 +25,7 @@ npm-debug.log*
 
 # TypeScript
 *.tsbuildinfo
+
+# Cypress
+cypress/videos
+cypress/screenshots

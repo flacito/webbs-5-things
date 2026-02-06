@@ -974,7 +974,8 @@ html.dark .mode-toggle button.active {
   width: 100%;
   min-height: 100vh;
   background: var(--gh-bg);
-  overflow-x: hidden; /* Allow vertical scroll for sticky to work */
+  /* Use clip instead of hidden - clip doesn't create a scroll container that breaks sticky */
+  overflow-x: clip;
 }
 
 /* Sticky toolbar for mobile presentation */

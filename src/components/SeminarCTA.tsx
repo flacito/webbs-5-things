@@ -7,12 +7,9 @@ export function SeminarCTA() {
 
   return (
     <>
-      <button
-        onClick={() => setShowModal(true)}
-        className="seminar-cta"
-      >
+      <button onClick={() => setShowModal(true)} className="seminar-cta mt-8">
         <DollarSign size={18} />
-        <span>Book a $7k Seminar</span>
+        <span>Book a Seminar</span>
       </button>
       <SeminarModal isOpen={showModal} onClose={() => setShowModal(false)} />
     </>
