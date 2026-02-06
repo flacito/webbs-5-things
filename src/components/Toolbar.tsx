@@ -13,12 +13,45 @@ interface ToolbarProps {
   isSticky?: boolean;
 }
 
+// Easing function: ease-in-out cubic for smooth acceleration/deceleration
+function easeInOutCubic(t: number): number {
+  return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+}
+
+// Animated scroll with easing
+function animateScrollToTop(element: Element, duration: number = 600) {
+  const start = element.scrollTop;
+  const startTime = performance.now();
+
+  function scroll(currentTime: number) {
+    const elapsed = currentTime - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = easeInOutCubic(progress);
+
+    element.scrollTop = start * (1 - eased);
+
+    if (progress < 1) {
+      requestAnimationFrame(scroll);
+    }
+  }
+
+  requestAnimationFrame(scroll);
+}
+
 export function Toolbar({ theme, setTheme, mode, setMode, isSticky = false }: ToolbarProps) {
   const [showSeminarModal, setShowSeminarModal] = useState(false);
 
   const goHome = () => {
-    // Navigate to first slide in Reveal.js
-    window.location.hash = '#/0';
+    if (isSticky) {
+      // Mobile: smooth scroll the snap container to top with easing
+      const container = document.querySelector('.mobile-snap-container');
+      if (container) {
+        animateScrollToTop(container, 600);
+      }
+    } else {
+      // Desktop: Reveal.js navigation
+      window.location.hash = '#/0';
+    }
   };
 
   return (
