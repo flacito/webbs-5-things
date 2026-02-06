@@ -73,21 +73,21 @@ interface MobilePresentationViewProps {
 
 export function MobilePresentationView({ content }: MobilePresentationViewProps) {
   const slides = useMemo(() => parseMarkdownToSlides(content), [content]);
-  const [showScrollIndicator, setShowScrollIndicator] = useState(false);
+  const [showArrow, setShowArrow] = useState(false);
   const [hasScrolled, setHasScrolled] = useState(false);
 
-  // Scroll indicator: show after 5s, pulse for 3s, repeat until scroll
+  // Arrow indicator: show after 5s, pulse for 3s, repeat until scroll
   useEffect(() => {
     if (hasScrolled) return;
 
     let timeoutId: number;
     const startCycle = () => {
-      // Wait 5 seconds, then show for 3 seconds
+      // Wait 5 seconds, then show arrow for 3 seconds
       timeoutId = window.setTimeout(() => {
         if (!hasScrolled) {
-          setShowScrollIndicator(true);
+          setShowArrow(true);
           timeoutId = window.setTimeout(() => {
-            setShowScrollIndicator(false);
+            setShowArrow(false);
             // Restart the cycle
             startCycle();
           }, 3000);
@@ -104,7 +104,7 @@ export function MobilePresentationView({ content }: MobilePresentationViewProps)
     const handleScroll = () => {
       if (window.scrollY > 50) {
         setHasScrolled(true);
-        setShowScrollIndicator(false);
+        setShowArrow(false);
       }
     };
 
@@ -134,10 +134,13 @@ export function MobilePresentationView({ content }: MobilePresentationViewProps)
           </div>
         </div>
       ))}
-      {/* Scroll indicator */}
-      {showScrollIndicator && !hasScrolled && (
-        <div className="scroll-indicator">
-          <ChevronDown size={28} />
+      {/* Scroll indicator - text always visible, arrow appears on timer */}
+      {!hasScrolled && (
+        <div className={`scroll-indicator ${showArrow ? "with-arrow" : ""}`}>
+          <span className="scroll-indicator-text">Scroll down...</span>
+          {showArrow && (
+            <ChevronDown size={24} className="scroll-indicator-arrow" />
+          )}
         </div>
       )}
     </div>
